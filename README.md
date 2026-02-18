@@ -1,7 +1,7 @@
 
 # Z Image Turbo via Gradio Public API, Run Locally Without GPU
 
-Generate high-quality images using the ```Z Image Turbo``` text-to-image generation model via API. If you want to build a small project but can’t use an image generation model due to GPU or storage limitations, you can run this on a free cloud server like Google Colab, Kaggle, Modal, lightning.ai etc and access it through an API. It may be slower, but it’s better than having no local image generation option at all.
+Generate high-quality images using the ```Z Image Turbo``` text-to-image generation model via API. If you want to build a small project but can’t use a local / offline / private image generation model due to GPU or storage limitations, you can run this on a free cloud server like Google Colab, Kaggle, Modal, lightning.ai etc and access it through an API. It may be slower, but it’s better than having no local image generation option at all.
 
 ---
 
