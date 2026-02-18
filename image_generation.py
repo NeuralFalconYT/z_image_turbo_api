@@ -154,7 +154,7 @@ def generate(input_data, model_data):
     
     return save_path, v['seed']
 
-def z_image_turbo(positive_prompt,negative_prompt="",width=1280, height=720, steps=9, model_data=None):
+def z_image_turbo(positive_prompt,negative_prompt="",width=1280, height=720, steps=9,cfg=1.0,seed=0,model_data=None):
     """
     Main Interface.
     Logic:
@@ -183,7 +183,8 @@ def z_image_turbo(positive_prompt,negative_prompt="",width=1280, height=720, ste
     positive_prompt = positive_prompt
     if negative_prompt=="":
         negative_prompt = 'low resolution, blurry, out of focus, soft focus, pixelated, jpeg artifacts, compression artifacts, noise, grain, banding, aliasing, oversharpened, motion blur, ghosting, double exposure, smearing, bad anatomy, distorted anatomy, deformed body, warped proportions'
-    
+    if seed==0:
+        random.randint(0, 1000000000)
     input_payload = {
         "input": {
             "positive_prompt": positive_prompt,
@@ -191,9 +192,9 @@ def z_image_turbo(positive_prompt,negative_prompt="",width=1280, height=720, ste
             "width": width,
             "height": height,
             "batch_size": 1,
-            "seed": random.randint(0, 1000000000),
+            "seed": seed,
             "steps": steps,
-            "cfg": 1.0,
+            "cfg": cfg,
             "sampler_name": "euler",
             "scheduler": "simple",
             "denoise": 1.0,
