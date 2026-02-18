@@ -27,13 +27,14 @@ else:
     MODEL_DATA = None
 
 
-
 def generate_image(
     positive_prompt,
     negative_prompt,
     width,
     height,
-    steps
+    steps,
+    cfg,
+    seed,
 ):
     img_path = z_image_turbo(
         positive_prompt=positive_prompt,
@@ -41,6 +42,8 @@ def generate_image(
         width=width,
         height=height,
         steps=steps,
+        cfg=cfg,
+        seed=seed,
         model_data=MODEL_DATA   # <- keep models loaded
     )
 
@@ -102,7 +105,16 @@ with gr.Blocks(theme=gr.themes.Soft(), css=custom_css) as demo:
                   outputs=[width, height]
               )
               steps = gr.Slider(1, 30, value=9, label="Steps")
-
+              cfg = gr.Slider(
+                        0.1, 10,
+                        value=1.0,
+                        step=0.1,
+                        label="CFG Scale"
+                    )
+              seed = gr.Number(
+                        value=0,
+                        label="Seed (0 = Random)"
+                    )
               negative = gr.Textbox(label="Negative Prompt",lines=4)
 
         # RIGHT SIDE OUTPUT
@@ -111,7 +123,7 @@ with gr.Blocks(theme=gr.themes.Soft(), css=custom_css) as demo:
 
     generate_btn.click(
         generate_image,
-        inputs=[positive, negative, width, height, steps],
+        inputs=[positive, negative, width, height, steps, cfg, seed],
         outputs=output_img
     )
 
