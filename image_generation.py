@@ -139,7 +139,7 @@ def generate(input_data, model_data):
     
     return save_path, v['seed']
 
-def z_image_turbo(prompt, width=1280, height=720, steps=9, model_data=None):
+def z_image_turbo(positive_prompt,negative_prompt="",width=1280, height=720, steps=9, model_data=None):
     """
     Main Interface.
     Logic:
@@ -165,8 +165,9 @@ def z_image_turbo(prompt, width=1280, height=720, steps=9, model_data=None):
             force_unload_after = False
     # ---------------------------
 
-    positive_prompt = prompt
-    negative_prompt = 'low resolution, blurry, out of focus, soft focus, pixelated, jpeg artifacts, compression artifacts, noise, grain, banding, aliasing, oversharpened, motion blur, ghosting, double exposure, smearing, bad anatomy, distorted anatomy, deformed body, warped proportions'
+    positive_prompt = positive_prompt
+    if negative_prompt=="":
+        negative_prompt = 'low resolution, blurry, out of focus, soft focus, pixelated, jpeg artifacts, compression artifacts, noise, grain, banding, aliasing, oversharpened, motion blur, ghosting, double exposure, smearing, bad anatomy, distorted anatomy, deformed body, warped proportions'
     
     input_payload = {
         "input": {
