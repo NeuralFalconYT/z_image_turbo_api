@@ -1,7 +1,22 @@
 import sys, os, random, time, torch, uuid, re, gc
 import numpy as np
 from PIL import Image
+import re, uuid
 
+def image_file_name(prompt):
+    # Remove punctuation, keep letters & numbers
+    clean = re.sub(r'[^a-zA-Z0-9\s]', '', prompt)
+
+    # Lowercase + replace spaces with _
+    clean = clean.lower().strip().replace(" ", "_")
+
+    # Limit length (optional but good)
+    clean = clean[:30]
+
+    # Add random suffix
+    uid = uuid.uuid4().hex[:8]
+
+    return f"{clean}_{uid}.png"
 # =================================================
 # 1. SETUP COMFYUI PATHS
 # =================================================
@@ -133,8 +148,8 @@ def generate(input_data, model_data):
 
     print("Decoding...")
     decoded = VAEDecode.decode(vae, samples)[0].detach()
-    
-    save_path = os.path.join(save_dir, f"{uuid.uuid4().hex[:6]}.png")
+    image_path=image_file_name(v['positive_prompt'])
+    save_path = os.path.join(save_dir, image_path)
     Image.fromarray(np.array(decoded*255, dtype=np.uint8)[0]).save(save_path)
     
     return save_path, v['seed']
