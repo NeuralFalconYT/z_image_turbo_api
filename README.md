@@ -61,6 +61,8 @@ def generate_and_save_image(
     width=1024,
     height=1024,
     steps=9,
+    cfg=1.0,
+    seed=0,
     save_dir="z_image_turbo_images"
 ): 
     global client
@@ -71,9 +73,14 @@ def generate_and_save_image(
         width=width,
         height=height,
         steps=steps,
+        cfg=cfg,
+	    seed=seed,
         api_name="/generate_image"
     )
 
+
+    
+    
     # Ensure save folder exists
     os.makedirs(save_dir, exist_ok=True)
 
@@ -87,14 +94,12 @@ def generate_and_save_image(
     shutil.copy(result, final_path)
 
     return final_path
-
-
-# Copy paste the public gradio url
-gradio_url="https://54a0319f1d589128ff.gradio.live/"
+#copy paste the public  url
+gradio_url="https://763237b0db4d84bba6.gradio.live/"
 client = Client(gradio_url)
 
 img_path = generate_and_save_image(
-    "a cute girl with short hair in a flower field"
+   "a cute girl with short hair in a flower field"
 )
 
 print("Saved to:", img_path)
@@ -105,8 +110,9 @@ print("Saved to:", img_path)
 ### Generated Sample Results:
 
 <p align="center">
+  <img src="https://github.com/user-attachments/assets/05a8bb2a-eda1-48ab-99e7-8a33b3cfe015" width="48%" />
+  <img src="https://github.com/user-attachments/assets/c47dd411-451f-4ba4-ad4e-6d6df5742f65" width="48%" />
   <img src="https://github.com/user-attachments/assets/6942492b-d52a-4f22-b1d0-59485042a6ac" width="48%" />
   <img src="https://github.com/user-attachments/assets/441c863c-3317-43f6-92ee-d020dcff9963" width="48%" />
+
 </p>
-
-
