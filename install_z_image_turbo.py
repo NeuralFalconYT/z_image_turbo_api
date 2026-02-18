@@ -68,7 +68,7 @@ def aria_download(url, output):
         "-o", os.path.basename(output),
     ]
 
-    print("\n⬇️ PRIMARY DOWNLOAD (aria2)")
+    print("\n⬇️ PRIMARY DOWNLOAD Python")
     print("URL :", url)
     print("SAVE:", output)
 
