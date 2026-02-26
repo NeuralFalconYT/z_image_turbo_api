@@ -155,6 +155,8 @@ def z_image():
     run([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"],
         check=False)
 
+    run([sys.executable, "-m", "pip", "install", "gradio"],
+        check=False)
     print("\n🎉 INSTALL COMPLETE")
 
 
